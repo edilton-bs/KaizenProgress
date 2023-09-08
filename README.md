@@ -24,7 +24,7 @@ Este projeto visa ajudar os usuários a rastrear e monitorar suas metas pessoais
 git clone https://github.com/edilton-bs/KaizenProgress.git
 
 # Navegue até o diretório do projeto
-cd meu-progresso
+cd KaizenProgress
 
 # Instale as dependências
 pip install -r requirements.txt

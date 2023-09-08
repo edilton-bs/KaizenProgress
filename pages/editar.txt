@@ -1,0 +1,35 @@
+import streamlit as st
+import pandas as pd
+import base64
+
+
+# Edição e Exclusão de Entradas
+with st.expander("Editar ou Excluir Metas"):
+    # Selecione o índice da meta
+    index_to_edit_or_delete = st.selectbox("Selecione o índice da meta para editar ou excluir", st.session_state.data.index)
+
+    # Seção de edição
+    new_name = st.text_input("Editar Nome", st.session_state.data.at[index_to_edit_or_delete, 'NOME'])
+    new_meta = st.number_input("Editar Meta", value=st.session_state.data.at[index_to_edit_or_delete, 'META'])
+    new_value = st.number_input("Editar Valor", value=st.session_state.data.at[index_to_edit_or_delete, 'VALOR'])
+
+    with st.form(key="edit_delete_form"):
+        form_submit_button = st.form_submit_button("Salvar Alterações")
+
+        # Atualizar os valores se o botão for pressionado
+        if form_submit_button:
+            st.session_state.data.at[index_to_edit_or_delete, 'NOME'] = new_name
+            st.session_state.data.at[index_to_edit_or_delete, 'META'] = new_meta
+            st.session_state.data.at[index_to_edit_or_delete, 'VALOR'] = new_value
+            st.success("Meta atualizada com sucesso!")
+    
+    # Seção de exclusão (movido para fora do formulário)
+    if st.button("Excluir Meta", key='delete'):
+        st.session_state.data = st.session_state.data.drop(index_to_edit_or_delete)  # Remove a linha com base no índice
+        st.success("Meta excluída com sucesso!")
+
+
+
+# Exibe o dataframe
+st.write("Seus dados até o momento:")
+st.write(st.session_state.data)

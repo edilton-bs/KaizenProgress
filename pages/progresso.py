@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import base64
 
 # Configurações iniciais do Streamlit
@@ -34,6 +35,17 @@ with st.expander("Add dados"):
             if total_value >= meta_name:
                 st.success(f"Parabéns, {name}! Você conseguiu!")
 
+            # Gráfico de linha não-acumulativo com pontos
+            st.write("Progresso:")
+            for name in st.session_state.data["NOME"].unique():
+                df = st.session_state.data[st.session_state.data["NOME"] == name][["VALOR"]]
+                plt.figure(figsize=(10, 4))
+                plt.plot(df["VALOR"], marker='o')
+                plt.title(f"Progresso de {name}")
+                plt.xlabel("Tempo")
+                plt.ylabel("Valor")
+                st.pyplot(plt)
+            
             # Gráfico da meta escolhida
             st.write(f"Progresso da Meta: {name}")
             st.line_chart(st.session_state.data[st.session_state.data["NOME"] == name][["VALOR"]].cumsum(), use_container_width=True)

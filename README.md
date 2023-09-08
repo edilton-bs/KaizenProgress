@@ -18,8 +18,9 @@ Este projeto visa ajudar os usuários a rastrear e monitorar suas metas pessoais
 
 ## Como Instalar
 
-\`\`\`bash
+```bash
 # Clone o repositório
+
 git clone https://github.com/edilton-bs/meu-progresso.git
 
 # Navegue até o diretório do projeto
@@ -30,7 +31,7 @@ pip install -r requirements.txt
 
 # Execute o aplicativo Streamlit
 streamlit run main.py
-\`\`\`
+```
 
 ## Como Utilizar
 

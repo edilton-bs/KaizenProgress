@@ -21,7 +21,7 @@ Este projeto visa ajudar os usuários a rastrear e monitorar suas metas pessoais
 ```bash
 # Clone o repositório
 
-git clone https://github.com/edilton-bs/meu-progresso.git
+git clone https://github.com/edilton-bs/KaizenProgress.git
 
 # Navegue até o diretório do projeto
 cd meu-progresso

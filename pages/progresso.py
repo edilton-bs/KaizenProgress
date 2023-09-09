@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import base64
+import spotipy
+import random
+from spotipy.oauth2 import SpotifyClientCredentials
+
+sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="2173f16a9c7c4c90bc3ebecbfed52a15",
+                                                           client_secret="2685aa5dbd0b40de870759851e02f58a"))
+
 
 # Configurações iniciais do Streamlit
 st.title('📈 Meu progresso')
@@ -40,6 +47,26 @@ if not st.session_state.data.empty:
     meta_name = st.session_state.data[st.session_state.data["NOME"] == name]['META'].iloc[0]
     if total_value >= meta_name:
         st.success(f"Parabéns, {name}! Você conseguiu!")
+
+        # Busca faixas baseadas em um critério
+        tracks = sp.search(q='genre:"Pop Rock"', type='track', limit=50)
+
+        # Verifica se temos faixas na resposta
+        if tracks['tracks']['items']:
+            # Escolhe uma faixa aleatória
+            random_track = random.choice(tracks['tracks']['items'])
+            
+            # Exibe informações sobre a faixa
+            track_name = random_track['name']
+            track_artist = random_track['artists'][0]['name']
+            track_link = random_track['external_urls']['spotify']
+            
+            st.success(f"Sua recompensa é ouvir a música: [{track_name} de {track_artist}]({track_link})")
+        else:
+            st.warning("Não foi possível encontrar uma faixa. Tente novamente mais tarde.")
+
+
+
 
     # Gráfico de linha não-acumulativo com pontos
     st.write("Progresso:")

@@ -49,7 +49,7 @@ if not st.session_state.data.empty:
         st.success(f"Parabéns, {name}! Você conseguiu!")
 
         # Busca faixas baseadas em um critério
-        tracks = sp.search(q='genre:"Pop Rock"', type='track', limit=50)
+        tracks = sp.search(q='genre:"Indie"', type='track', limit=50)
 
         # Verifica se temos faixas na resposta
         if tracks['tracks']['items']:

@@ -66,7 +66,7 @@ if not data.empty:
 
 
     # Gráfico de linha não-acumulativo com pontos
-    st.write("Progresso:")
+    st.write(f"Progresso: {total_value}/{meta_name}")
     #for name in st.session_state.data["NOME"].unique():
     df = data[data["NOME"] == name][["VALOR"]]
     plt.figure(figsize=(10, 4))
